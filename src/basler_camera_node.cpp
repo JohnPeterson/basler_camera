@@ -79,6 +79,26 @@ void handle_basler_enum_parameter(CInstantCamera& camera, string name, string va
   }
 }
 
+void handle_basler_bool_parameter(CInstantCamera& camera, string name, bool value)
+{
+  INodeMap& nodemap = camera.GetNodeMap();
+  try
+  {
+    ROS_INFO_STREAM("Setting bool param " << name << " to " << value << ".");
+    CBooleanPtr this_node(nodemap.GetNode(name.c_str()));
+    if (!IsWritable(this_node))
+    {
+      ROS_ERROR_STREAM("Basler parameter '" << name << "' isn't writable or doesn't exist.");
+      return;
+    }
+    this_node->SetValue(value);
+  }
+  catch (const GenericException& e)
+  {
+    ROS_ERROR_STREAM(e.GetDescription());
+  }
+}
+
 void handle_basler_parameter(CInstantCamera& camera, XmlRpc::XmlRpcValue& param)
 {
   string type = param["type"];
@@ -99,6 +119,12 @@ void handle_basler_parameter(CInstantCamera& camera, XmlRpc::XmlRpcValue& param)
     ROS_ASSERT_MSG(param["value"].getType() == XmlRpc::XmlRpcValue::TypeString,
                    "Type of value for %s must be string", string(param["name"]).c_str());
     handle_basler_enum_parameter(camera, param["name"], param["value"]);
+  }
+  else if (("bool" == type) || ("boolean" == type))
+  {
+    ROS_ASSERT_MSG(param["value"].getType() == XmlRpc::XmlRpcValue::TypeBoolean,
+                   "Type of value for %s must be bool", string(param["name"]).c_str());
+    handle_basler_bool_parameter(camera, param["name"], param["value"]);
   }
   else
   {
@@ -171,6 +197,7 @@ int main(int argc, char* argv[])
     } else {
       // Look up the camera by its serial number
       for (size_t i=0; i<devices.size(); i++) {
+        ROS_INFO("Serial Number: %s",devices[i].GetSerialNumber().c_str());
         if (devices[i].GetSerialNumber().c_str() == serial_number) {
           camera.Attach(tlFactory.CreateDevice(devices[i]));
           break;
