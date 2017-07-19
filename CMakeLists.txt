@@ -9,6 +9,7 @@ catkin_package(
 #  LIBRARIES basler_camera
 #  CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
+/opt/pylon5/include/pylon
 )
 
 ###########

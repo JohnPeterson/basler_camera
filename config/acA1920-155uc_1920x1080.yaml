@@ -1,0 +1,23 @@
+# Basler USB 3.0 acA1920-155uc with 12.5 mm F 16-1.4 RICOH lens
+image_width: 1920
+image_height: 1200
+camera_name: /acA1920_155uc
+camera_matrix:
+  rows: 3
+  cols: 3
+# fx skew cx 0 fy cy 0 0 1
+  data: [2183.162066, -0.002081, 934.307476, 0, 2185.384796, 585.428464, 0, 0, 1]
+distortion_model: rational_polynomial
+distortion_coefficients:
+  rows: 1
+  cols: 5
+# k1, k2, p1, p2, k3
+  data: [-0.123951, 0.153274, 0.001847, -0.002498, 0.110868]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [2183.162066, -0.002081, 934.307476, 0, 0, 2185.384796, 585.428464, 0, 0, 0, 1, 0]

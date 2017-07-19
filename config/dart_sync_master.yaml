@@ -12,10 +12,6 @@ basler_params:
     type: enum
     value: Continuous
   -
-    name: OverlapMode
-    type: enum
-    value: 'Off'
-  -
     name: ExposureAuto
     type: enum
     value: 'Off'
@@ -51,11 +47,4 @@ basler_params:
     name: LineSelector
     type: enum
     value: Line1
-  -
-    name: LineSource
-    type: enum
-    value: ExposureActive
-  -
-    name: LineMode
-    type: enum
-    value: Output
+
