@@ -1,8 +1,12 @@
 basler_params:
   -
+    name: AcquisitionFrameRateEnable
+    type: bool
+    value: True
+  -
     name: AcquisitionFrameRate
     type: float
-    value: 10.0
+    value: 50.0
   -
     name: ExposureTime
     type: float
