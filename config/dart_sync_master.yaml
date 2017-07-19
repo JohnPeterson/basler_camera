@@ -6,7 +6,7 @@ basler_params:
   -
     name: AcquisitionFrameRate
     type: float
-    value: 50.0
+    value: 30.0
   -
     name: ExposureTime
     type: float
